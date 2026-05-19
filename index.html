@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Pernikahan Romantis & Elegan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+    <style>
+        :root {
+            --primary-color: #be9b46; /* Emas Klasik */
+            --bg-soft: #fcf8f5; /* Krem / Off-white Jawa Tradisional */
+            --text-dark: #2c2c2c;
+            --text-muted: #666666;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-soft);
+            color: var(--text-dark);
+            overflow: hidden; /* Dikunci sebelum undangan dibuka */
+            scroll-behavior: smooth;
+        }
+
+        /* --- OVERLAY COVER --- */
+        #cover {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)), 
+                        url('https://images.unsplash.com/photo-1607190074257-dd4b7af0309f?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            z-index: 9999;
+            transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+            text-align: center;
+            padding: 20px;
+        }
+
+        #cover p {
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        #cover h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            color: var(--primary-color);
+            margin: 15px 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+        }
+
+        .btn-open {
+            padding: 14px 35px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-top: 25px;
+        }
+
+        .btn-open:hover {
+            transform: scale(1.05);
+            background-color: #a38133;
+            box-shadow: 0 6px 25px rgba(190, 155, 70, 0.4);
+        }
+
+        /* --- MUSIK KONTROL --- */
+        #music-control {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 55px;
+            height: 55px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            animation: pulse 2s infinite;
+            display: none;
+        }
+
+        /* --- KONTEN UTAMA --- */
+        .container {
+            max-width: 550px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.08);
+        }
+
+        section {
+            padding: 80px 25px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1.2s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .divider {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            margin: 35px 0;
+        }
+
+        /* 1. HERO SECTION */
+        .hero {
+            height: 85vh;
+            background: linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.85)),
+                        url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?q=80&w=800&auto=format&fit=crop') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h2 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.8rem;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+
+        /* 2. MEMPELAI SECTION */
+        .mempelai-box {
+            margin: 40px 0;
+        }
+
+        .mempelai-img {
+            width: 180px;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 100px 100px 0 0; /* Model Kubah/Arch Elegan */
+            border: 4px solid var(--primary-color);
+            margin: 0 auto 20px auto;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.5s ease;
+        }
+
+        .mempelai-box:hover .mempelai-img {
+            transform: scale(1.03);
+        }
+
+        .mempelai-name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem;
+            color: var(--primary-color);
+        }
+
+        /* 3. STORY / ACARA SECTION */
+        .card {
+            background-color: var(--bg-soft);
+            padding: 35px 25px;
+            border-radius: 20px;
+            margin: 25px 0;
+            border: 1px solid rgba(190, 155, 70, 0.15);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            text-align: left;
+        }
+
+        .card h4 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-align: center;
+            border-bottom: 1px solid rgba(190, 155, 70, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+
+        .card i {
+            color: var(--primary-color);
+            width: 25px;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        /* 4. GALERI FOTO SECTION (FITUR BARU) */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            height: 200px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .gallery-item.wide {
+            grid-column: span 2;
+            height: 250px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Keyframes */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="wedding-music" loop>
+        <source src="Denok - (Orchestra Version) _ Sound Viral Di Tiktok _ Ora bakal cukup lautan mangsi.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="music-control" onclick="toggleMusic()">
+        <i id="music-icon" class="fas fa-compact-disc fa-spin"></i>
+    </div>
+
+    <div id="cover">
+        <p class="animate__animated animate__fadeInDown">Mugi Pinaringan Berkah</p>
+        <p style="font-size: 0.8rem; letter-spacing: 2px;">The Wedding Celebration of</p>
+        <h1 class="animate__animated animate__zoomIn">Satria & Kinanti</h1>
+        <div style="margin-top: 20px;">
+            <p style="font-size: 0.8rem; text-transform: none; font-style: italic; color: #ddd;">Kepada Bapak/Ibu/Saudara/i:</p>
+            <p style="font-weight: 600; color: var(--primary-color); margin-top: 5px; font-size: 1.1rem;">Tamu Undangan Yang Berbahagia</p>
+        </div>
+        <button class="btn-open animate__animated animate__fadeInUp animate__delay-1s" onclick="openInvitation()">
+            <i class="fas fa-envelope-open"></i> Buka Undangan
+        </button>
+    </div>
+
+    <div class="container">
+        
+        <section class="hero visible">
+            <p style="letter-spacing: 4px; text-transform: uppercase; font-size: 0.85rem; color: var(--text-muted);">Saking Manah Ingkang Tulus</p>
+            <h2>Satria & Kinanti</h2>
+            <p style="margin-top: 15px; font-weight: 600; letter-spacing: 2px; color: var(--primary-color);">SABTU, 12 DESEMBER 2026</p>
+        </section>
+
+        <section class="scroll-animate">
+            <p style="font-style: italic; color: var(--text-muted); line-height: 1.8; font-size: 0.95rem;">
+                "Nenek moyang kita paring piwulang, bilih krami iku dudu amung perkoro nunggal guling, nanging nunggal rasa, karsa, lan cipta. Mugi Gusti tansah ngreksa katresnan kita."
+            </p>
+            <div class="divider">❖ ∞ ❖</div>
+            <p style="font-size: 0.9rem; line-height: 1.6; color: var(--text-dark);">
+                Aparatur sih wilayah Gusti Ingkang Moho Welas Asih, kawula nyuwun donga pangestu dhumateng panjenengan sedaya wonten ing dinten rabi kawula:
+            </p>
+        </section>
+
+        <section class="scroll-animate">
+            <h3 style="letter-spacing: 3px; font-size: 1.2rem; color: var(--text-dark);">PUNIKA MEMPELAI</h3>
+            
+            <div class="mempelai-box">
+                <img class="mempelai-img" src="https://images.unsplash.com/photo-1621184455862-c163dfb30e0f?q=80&w=400&auto=format&fit=crop" alt="Mempelai Wanita">
+                <div class="mempelai-name">Kinanti Larasati, S.T.</div>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px;">Putri Ragil saking Ibu & Bapak Harjo Sasmito</p>
+                <p style="font-size: 0.8rem; color: #999;">Sleman, Yogyakarta</p>
+            </div>
+
+            <div class="divider" style="font-size: 1.8rem;">kaliyan</div>
+
+            <div class="mempelai-box">
+                <img class="mempelai-img" src="https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?q=80&w=400&auto=format&fit=crop" alt="Mempelai Pria">
+                <div class="mempelai-name">Satria Baskoro, M.B.A.</div>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px;">Putra Pembarep saking Ibu & Bapak Tri Kuncoro</p>
+                <p style="font-size: 0.8rem; color: #999;">Kediri, Jawa Timur</p>
+            </div>
+        </section>
+
+        <section class="scroll-animate">
+            <h3 style="letter-spacing: 3px; font-size: 1.2rem;">JADWAL ADICARA</h3>
+            
+            <div class="card">
+                <h4><i class="fas fa-gavel"></i> IJAB QOBUL / AKAD</h4>
+                <p><i class="far fa-calendar-alt"></i> <b>Sabtu, 12 Desember 2026</b></p>
+                <p><i class="far fa-clock"></i> 08.00 - 10.00 WIB</p>
+                <p><i class="fas fa-map-marker-alt"></i> Ballroom Sasono Utomo, Hotel Heritage</p>
+            </div>
+
+            <div class="card">
+                <h4><i class="fas fa-glass-cheers"></i> PARENGAN / RESEPSI</h4>
+                <p><i class="far fa-calendar-alt"></i> <b>Sabtu, 12 Desember 2026</b></p>
+                <p><i class="far fa-clock"></i> 11.00 - 14.00 WIB</p>
+                <p><i class="fas fa-map-marker-alt"></i> Gedung Sasono Utomo Utama, Hotel Heritage</p>
+            </div>
+        </section>
+
+        <section class="scroll-animate">
+            <h3 style="letter-spacing: 3px; font-size: 1.2rem; margin-bottom: 10px;">KAGUNAN ASMORO</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted); font-style: italic;">Potret kebahagiaan cerita cinta kami</p>
+            
+            <div class="gallery-grid">
+                <div class="gallery-item wide">
+                    <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=600&auto=format&fit=crop" alt="Prewedding 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=400&auto=format&fit=crop" alt="Prewedding 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?q=80&w=400&auto=format&fit=crop" alt="Prewedding 3">
+                </div>
+                <div class="gallery-item wide">
+                    <img src="https://images.unsplash.com/photo-1519225495810-7512c696505a?q=80&w=600&auto=format&fit=crop" alt="Prewedding 4">
+                </div>
+            </div>
+        </section>
+
+        <section class="scroll-animate" style="background: linear-gradient(to bottom, #ffffff, #f7f1eb); padding-bottom: 60px;">
+            <div class="divider">❖</div>
+            <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-muted);">
+                Kula sakulwarga ngaturaken agunging panuwun dhumateng rawuh lan donga pangestu panjenengan sedaya.
+            </p>
+            
+            <h2 style="font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--primary-color); margin-top: 30px;">Matur Nuwun</h2>
+            
+            <p style="font-size: 0.75rem; margin-top: 50px; color: #aaa; letter-spacing: 1px;">
+                &copy; 2026 Satria & Kinanti Wedding. All Rights Reserved.
+            </p>
+        </section>
+
+    </div>
+
+    <script>
+        const music = document.getElementById('wedding-music');
+        const musicIcon = document.getElementById('music-icon');
+        const musicControl = document.getElementById('music-control');
+
+        // Fungsi Membuka Undangan
+        function openInvitation() {
+            document.getElementById('cover').style.transform = 'translateY(-100%)';
+            document.body.style.overflow = 'auto'; // Mengizinkan scroll kembali
+            musicControl.style.display = 'flex';
+            
+            playMusic();
+            animateOnScroll(); // Trigger inisiasi awal tracking animasi scroll
+        }
+
+        // Fungsi Memutar Musik
+        function playMusic() {
+            music.play().then(() => {
+                musicIcon.className = 'fas fa-compact-disc fa-spin';
+            }).catch(err => {
+                console.log("Autoplay dicegah sistem browser: ", err);
+            });
+        }
+
+        // Fungsi Play & Pause Manual
+        function toggleMusic() {
+            if (music.paused) {
+                music.play();
+                musicIcon.className = 'fas fa-compact-disc fa-spin';
+            } else {
+                music.pause();
+                musicIcon.className = 'fas fa-music';
+            }
+        }
+
+        // INTERSECTION OBSERVER (Animasi Gerakan Smooth Muncul Saat di-Scroll)
+        const sections = document.querySelectorAll('.scroll-animate');
+        const options = {
+            threshold: 0.1, // Elemen muncul jika sudah terintip sedikit di layar
+            rootMargin: "0px 0px -60px 0px"
+        };
+
+        const observer = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target); // Hanya animasi berjalan 1x pas di-scroll ke bawah
+                }
+            });
+        }, options);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
